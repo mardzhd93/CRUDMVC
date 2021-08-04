@@ -1,0 +1,23 @@
+﻿@using CrudMVCRazor.ViewModels
+@model List<VENDEDORViewModel>
+@{
+    ViewBag.Title = "List";
+}
+
+@foreach (var Vendedor in Model)
+{
+    <div class="col-sm-11">
+        <table style="width:100%;">
+            <tr><td>&nbsp; Nombre: @Vendedor.Nombre</td></tr>
+            <tr><td>&nbsp; Direccion: @Vendedor.Direccion</td></tr>
+            <tr><td>&nbsp; CodigoPostal: @Vendedor.CodigoPostal</td></tr>
+            <tr><td>&nbsp; IdCiudad: @Vendedor.IdCiudad</td></tr>
+            <tr><td>&nbsp; IdVendedorSupervisor: @Vendedor.IdVendedorSupervisor</td></tr>
+        </table>
+        <input onclick="document.location.href='@Url.Content("~/IroxIT/Edit/?Id="+Vendedor.IdVendedor)'" type="button" value="Editar" />
+        <input onclick="jsDelete(@Vendedor.IdVendedor)" type="button" value="Eliminar" />
+    </div>
+ 
+}
+
+

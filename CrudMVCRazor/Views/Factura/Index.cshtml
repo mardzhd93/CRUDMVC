@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+    <h2>Facturación</h2>
+<input type="button" value="Nuevo" onclick="document.location.href='@Url.Content("~/Factura/New")'" />
+<div id="divLista" style="border: 1px solid #808080">
+
+</div>
+<script>
+    urlGet = "@Url.Content("~/Factura/List")";
+    Get();
+    function Get() {
+        fetch(urlGet)
+            .then(function (response) {
+                return response.text();
+            })
+            .then((data) => {
+                document.getElementById("divLista").innerHTML = data;
+            })
+    }
+              //eliminar
+    function jsDelete(Id) {
+        fetch("@Url.Content("~/Factura/Delete")", {
+            method: "POST",
+            body: JSON.stringify({
+                Id: Id
+            }),
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            if (response.ok)
+                return response.json()
+            else
+                alert("Error al ejecutar")
+
+        }).then(function (Data) {
+            if (Data != "1") {
+                alert(Data)
+            } else {
+                Get();
+            }
+        })
+    }
+</script>

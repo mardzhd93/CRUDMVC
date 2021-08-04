@@ -1,0 +1,22 @@
+﻿@using CrudMVCRazor.ViewModels
+@model List<FacturaViewModel>
+@{
+    ViewBag.Title = "List";
+}
+
+
+
+@foreach (var Factura in Model)
+{
+    <div class="col-sm-11">
+        <table style="width:100%;">
+            <tr><td>&nbsp; Fecha: @Factura.Fecha</td></tr>
+            <tr><td>&nbsp; IdCliente: @Factura.IdCliente</td></tr>
+            <tr><td>&nbsp; IdVendedor: @Factura.IdVendedor</td></tr>
+            <tr><td>&nbsp; Iva: @Factura.Iva</td></tr>
+        </table>
+        <input onclick="document.location.href='@Url.Content("~/Factura/Edit/?Id="+Factura.Id_Factura)'" type="button" value="Editar" />
+        <input onclick="jsDelete(@Factura.Id_Factura)" type="button" value="Eliminar" />
+    </div>
+
+}

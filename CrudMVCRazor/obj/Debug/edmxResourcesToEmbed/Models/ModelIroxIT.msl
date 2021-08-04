@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="IroxITModelStoreContainer" CdmEntityContainer="IroxITEntities">
+    <EntitySetMapping Name="ARTICULOS">
+      <EntityTypeMapping TypeName="IroxITModel.ARTICULO">
+        <MappingFragment StoreEntitySet="ARTICULOS">
+          <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CIUDADES">
+      <EntityTypeMapping TypeName="IroxITModel.CIUDADE">
+        <MappingFragment StoreEntitySet="CIUDADES">
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLIENTES">
+      <EntityTypeMapping TypeName="IroxITModel.CLIENTE">
+        <MappingFragment StoreEntitySet="CLIENTES">
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADOS">
+      <EntityTypeMapping TypeName="IroxITModel.ESTADO">
+        <MappingFragment StoreEntitySet="ESTADOS">
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FACTURADETALLEs">
+      <EntityTypeMapping TypeName="IroxITModel.FACTURADETALLE">
+        <MappingFragment StoreEntitySet="FACTURADETALLE">
+          <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+          <ScalarProperty Name="NumLinea" ColumnName="NumLinea" />
+          <ScalarProperty Name="Id_FacturaDetalle" ColumnName="Id_FacturaDetalle" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FACTURAS">
+      <EntityTypeMapping TypeName="IroxITModel.FACTURA">
+        <MappingFragment StoreEntitySet="FACTURAS">
+          <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+          <ScalarProperty Name="Iva" ColumnName="Iva" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IroxITModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VENDEDORES">
+      <EntityTypeMapping TypeName="IroxITModel.VENDEDORE">
+        <MappingFragment StoreEntitySet="VENDEDORES">
+          <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="IdVendedorSupervisor" ColumnName="IdVendedorSupervisor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

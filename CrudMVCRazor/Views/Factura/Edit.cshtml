@@ -1,0 +1,55 @@
+﻿@model CrudMVCRazor.ViewModels.FacturaViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+<form>
+    <div class="row>
+        <div class="form-group">
+            @Html.HiddenFor(d => d.Id_Factura, new { id = "Id_Factura" })
+            @Html.LabelFor(D => D.IdCliente)
+            @Html.TextBoxFor(d => d.IdCliente, new { id = "IdCliente" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(D => D.IdVendedor)
+            @Html.TextBoxFor(d => d.IdVendedor, new { id = "IdVendedor" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(D => D.Iva)
+            @Html.TextBoxFor(d => d.Iva, new { id = "Iva" })
+        </div>
+
+        <input type="button" value="Editar" onclick="jsEdit()" />
+    </div>
+</form>
+<script>
+    var url = "@Url.Content("~/Factura/Update")"
+    function jsEdit() {
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                Id_Factura: document.getElementById("Id_Factura").value,
+                IdCliente: document.getElementById("IdCliente").value,
+                IdVendedor: document.getElementById("IdVendedor").value,
+                Iva: document.getElementById("Iva").value
+            }),
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            if (response.ok)
+                return response.json()
+            else
+                alert("Error al ejecutar")
+
+        }).then(function (Data) {
+            if (Data != "1") {
+                alert(Data)
+            } else {
+                document.location.href = "@Url.Content("~/Factura/")";
+            }
+        })
+    }
+</script>

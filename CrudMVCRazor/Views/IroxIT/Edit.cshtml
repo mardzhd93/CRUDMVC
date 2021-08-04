@@ -1,0 +1,64 @@
+﻿@model CrudMVCRazor.ViewModels.VENDEDORViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+    <h2>Edit</h2>
+    <form>
+        <div class="row>
+            <div class="form-group">
+                @Html.HiddenFor(d => d.IdVendedor, new { id = "IdVendedor" })
+                @Html.LabelFor(D => D.Nombre)
+                @Html.TextBoxFor(d => d.Nombre, new { id = "Nombre" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(D => D.Direccion)
+                @Html.TextBoxFor(d => d.Direccion, new { id = "Direccion" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(D => D.CodigoPostal)
+                @Html.TextBoxFor(d => d.CodigoPostal, new { id = "CodigoPostal" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(D => D.IdCiudad)
+                @Html.TextBoxFor(d => d.IdCiudad, new { id = "IdCiudad" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(D => D.IdVendedorSupervisor)
+                @Html.TextBoxFor(d => d.IdVendedorSupervisor, new { id = "IdVendedorSupervisor" })
+            </div>
+            <input type="button" value="Editar" onclick="jsEditVendedor()"/>
+        </div>
+    </form>
+<script>
+    var url = "@Url.Content("~/IroxIt/Update")"
+    function jsEditVendedor() {
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                Nombre: document.getElementById("Nombre").value,
+                Direccion: document.getElementById("Direccion").value,
+                CodigoPostal: document.getElementById("CodigoPostal").value,
+                IdCiudad: document.getElementById("IdCiudad").value,
+                IdVendedorSupervisor: document.getElementById("IdVendedorSupervisor").value,
+                IdVendedor: document.getElementById("IdVendedor").value
+            }),
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json"
+            }
+        }).then(function (response) {
+            if (response.ok)
+                return response.json()
+            else
+                alert("Error al ejecutar")
+
+        }).then(function (Data) {
+            if (Data != "1") {
+                alert(Data)
+            } else {
+                document.location.href = "@Url.Content("~/IroxIT/")";
+            }
+        })
+    }
+</script>

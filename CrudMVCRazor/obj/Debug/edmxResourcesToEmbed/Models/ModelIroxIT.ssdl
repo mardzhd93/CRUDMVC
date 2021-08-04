@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IroxITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ARTICULOS">
+    <Key>
+      <PropertyRef Name="Id_Articulo" />
+    </Key>
+    <Property Name="Id_Articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="200" />
+    <Property Name="Precio" Type="float" />
+    <Property Name="Stock" Type="int" />
+    <Property Name="StockMinimo" Type="int" />
+  </EntityType>
+  <EntityType Name="CIUDADES">
+    <Key>
+      <PropertyRef Name="IdCiudad" />
+    </Key>
+    <Property Name="IdCiudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="120" />
+    <Property Name="IdEstado" Type="int" />
+  </EntityType>
+  <EntityType Name="CLIENTES">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="120" />
+    <Property Name="Direccion" Type="varchar" MaxLength="120" />
+    <Property Name="CodigoPostal" Type="smallint" />
+    <Property Name="IdCiudad" Type="int" />
+  </EntityType>
+  <EntityType Name="ESTADOS">
+    <Key>
+      <PropertyRef Name="IdEstado" />
+    </Key>
+    <Property Name="IdEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="120" />
+  </EntityType>
+  <EntityType Name="FACTURADETALLE">
+    <Key>
+      <PropertyRef Name="Id_Factura" />
+      <PropertyRef Name="NumLinea" />
+    </Key>
+    <Property Name="Id_Factura" Type="int" Nullable="false" />
+    <Property Name="NumLinea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_FacturaDetalle" Type="int" />
+    <Property Name="Cantidad" Type="float" />
+    <Property Name="Id_Articulo" Type="int" />
+    <Property Name="Precio" Type="float" />
+  </EntityType>
+  <EntityType Name="FACTURAS">
+    <Key>
+      <PropertyRef Name="Id_Factura" />
+    </Key>
+    <Property Name="Id_Factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="IdVendedor" Type="int" />
+    <Property Name="Iva" Type="float" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="VENDEDORES">
+    <Key>
+      <PropertyRef Name="IdVendedor" />
+    </Key>
+    <Property Name="IdVendedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="120" />
+    <Property Name="Direccion" Type="varchar" MaxLength="120" />
+    <Property Name="CodigoPostal" Type="smallint" />
+    <Property Name="IdCiudad" Type="int" />
+    <Property Name="IdVendedorSupervisor" Type="int" />
+  </EntityType>
+  <Association Name="FK__CIUDADES__IdEsta__267ABA7A">
+    <End Role="ESTADOS" Type="Self.ESTADOS" Multiplicity="0..1" />
+    <End Role="CIUDADES" Type="Self.CIUDADES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOS">
+        <PropertyRef Name="IdEstado" />
+      </Principal>
+      <Dependent Role="CIUDADES">
+        <PropertyRef Name="IdEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CLIENTES__IdCiud__29572725">
+    <End Role="CIUDADES" Type="Self.CIUDADES" Multiplicity="0..1" />
+    <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIUDADES">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="CLIENTES">
+        <PropertyRef Name="IdCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURADE__Id_Ar__35BCFE0A">
+    <End Role="ARTICULOS" Type="Self.ARTICULOS" Multiplicity="0..1" />
+    <End Role="FACTURADETALLE" Type="Self.FACTURADETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ARTICULOS">
+        <PropertyRef Name="Id_Articulo" />
+      </Principal>
+      <Dependent Role="FACTURADETALLE">
+        <PropertyRef Name="Id_Articulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURADE__Id_Ar__36B12243">
+    <End Role="ARTICULOS" Type="Self.ARTICULOS" Multiplicity="0..1" />
+    <End Role="FACTURADETALLE" Type="Self.FACTURADETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ARTICULOS">
+        <PropertyRef Name="Id_Articulo" />
+      </Principal>
+      <Dependent Role="FACTURADETALLE">
+        <PropertyRef Name="Id_Articulo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURADE__Id_Fa__37A5467C">
+    <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="1" />
+    <End Role="FACTURADETALLE" Type="Self.FACTURADETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACTURAS">
+        <PropertyRef Name="Id_Factura" />
+      </Principal>
+      <Dependent Role="FACTURADETALLE">
+        <PropertyRef Name="Id_Factura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURADE__Id_Fa__38996AB5">
+    <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="1" />
+    <End Role="FACTURADETALLE" Type="Self.FACTURADETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FACTURAS">
+        <PropertyRef Name="Id_Factura" />
+      </Principal>
+      <Dependent Role="FACTURADETALLE">
+        <PropertyRef Name="Id_Factura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURAS__IdClie__31EC6D26">
+    <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="0..1" />
+    <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTES">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="FACTURAS">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FACTURAS__IdVend__32E0915F">
+    <End Role="VENDEDORES" Type="Self.VENDEDORES" Multiplicity="0..1" />
+    <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VENDEDORES">
+        <PropertyRef Name="IdVendedor" />
+      </Principal>
+      <Dependent Role="FACTURAS">
+        <PropertyRef Name="IdVendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VENDEDORE__IdCiu__2C3393D0">
+    <End Role="CIUDADES" Type="Self.CIUDADES" Multiplicity="0..1" />
+    <End Role="VENDEDORES" Type="Self.VENDEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIUDADES">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="VENDEDORES">
+        <PropertyRef Name="IdCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VENDEDORE__IdVen__2D27B809">
+    <End Role="VENDEDORES" Type="Self.VENDEDORES" Multiplicity="0..1" />
+    <End Role="VENDEDORES1" Type="Self.VENDEDORES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VENDEDORES">
+        <PropertyRef Name="IdVendedor" />
+      </Principal>
+      <Dependent Role="VENDEDORES1">
+        <PropertyRef Name="IdVendedorSupervisor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="IroxITModelStoreContainer">
+    <EntitySet Name="ARTICULOS" EntityType="Self.ARTICULOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CIUDADES" EntityType="Self.CIUDADES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ESTADOS" EntityType="Self.ESTADOS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACTURADETALLE" EntityType="Self.FACTURADETALLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FACTURAS" EntityType="Self.FACTURAS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VENDEDORES" EntityType="Self.VENDEDORES" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CIUDADES__IdEsta__267ABA7A" Association="Self.FK__CIUDADES__IdEsta__267ABA7A">
+      <End Role="ESTADOS" EntitySet="ESTADOS" />
+      <End Role="CIUDADES" EntitySet="CIUDADES" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CLIENTES__IdCiud__29572725" Association="Self.FK__CLIENTES__IdCiud__29572725">
+      <End Role="CIUDADES" EntitySet="CIUDADES" />
+      <End Role="CLIENTES" EntitySet="CLIENTES" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURADE__Id_Ar__35BCFE0A" Association="Self.FK__FACTURADE__Id_Ar__35BCFE0A">
+      <End Role="ARTICULOS" EntitySet="ARTICULOS" />
+      <End Role="FACTURADETALLE" EntitySet="FACTURADETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURADE__Id_Ar__36B12243" Association="Self.FK__FACTURADE__Id_Ar__36B12243">
+      <End Role="ARTICULOS" EntitySet="ARTICULOS" />
+      <End Role="FACTURADETALLE" EntitySet="FACTURADETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURADE__Id_Fa__37A5467C" Association="Self.FK__FACTURADE__Id_Fa__37A5467C">
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+      <End Role="FACTURADETALLE" EntitySet="FACTURADETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURADE__Id_Fa__38996AB5" Association="Self.FK__FACTURADE__Id_Fa__38996AB5">
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+      <End Role="FACTURADETALLE" EntitySet="FACTURADETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURAS__IdClie__31EC6D26" Association="Self.FK__FACTURAS__IdClie__31EC6D26">
+      <End Role="CLIENTES" EntitySet="CLIENTES" />
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FACTURAS__IdVend__32E0915F" Association="Self.FK__FACTURAS__IdVend__32E0915F">
+      <End Role="VENDEDORES" EntitySet="VENDEDORES" />
+      <End Role="FACTURAS" EntitySet="FACTURAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VENDEDORE__IdCiu__2C3393D0" Association="Self.FK__VENDEDORE__IdCiu__2C3393D0">
+      <End Role="CIUDADES" EntitySet="CIUDADES" />
+      <End Role="VENDEDORES" EntitySet="VENDEDORES" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VENDEDORE__IdVen__2D27B809" Association="Self.FK__VENDEDORE__IdVen__2D27B809">
+      <End Role="VENDEDORES" EntitySet="VENDEDORES" />
+      <End Role="VENDEDORES1" EntitySet="VENDEDORES" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
